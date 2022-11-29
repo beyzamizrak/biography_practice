@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Biography {
     public static void main(String[] args) {
 
@@ -32,6 +35,64 @@ public class Biography {
          */
 
         //YOUR CODE HERE
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("What is your favourite author's first name? ");
+        String firstName = scanner.nextLine();
+
+        System.out.println("What is your favourite author's last name? ");
+        String lastName  = scanner.nextLine();
+
+        System.out.println("Where is your favorite author from?");
+        String country  = scanner.nextLine();
+
+        System.out.println("Is your favorite author alive? Y/N");
+        boolean isAlive  = scanner.next().toLowerCase().startsWith("y");
+
+        int age = 0;
+        if (isAlive) {
+            System.out.println("How old is your favourite author?");
+            age = scanner.nextInt();
+            scanner.nextLine();
+        }
+
+        ArrayList<Book> books = new ArrayList<>();
+
+        String bookInfo = "";
+
+        do{
+            System.out.println("Would you like to enter book information? (Y/N)");
+            bookInfo = scanner.next();
+            if(bookInfo.toLowerCase().startsWith("y")){
+                System.out.println("What is the name of the book?");
+                String bookName = scanner.nextLine();
+                scanner.nextLine();
+
+                System.out.println("What is the genre of the book?");
+                String bookGenre = scanner.nextLine();
+
+                System.out.println("How many pages does book have?");
+                int totalPage = scanner.nextInt();
+                scanner.nextLine();
+
+                books.add(new Book(bookName, bookGenre, totalPage));
+            }
+        }
+        while (bookInfo.toLowerCase().startsWith("y"));
+
+
+        Author author = new Author(firstName, lastName, country, isAlive, age, books);
+
+        System.out.println("Author's information = " + author);
+
+        System.out.println("Author's books are as listed below:");
+
+        for (Book book : books) {
+            System.out.println(book);
+        }
+
+
 
     }
 }
